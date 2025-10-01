@@ -5,7 +5,7 @@ WORKDIR /imbuAPI
 # 종속성 설치
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-# COPY .env .env
+COPY .env .env
 # FastAPI 애플리케이션 복사
 COPY . .
 # 서버 실행 명령어
