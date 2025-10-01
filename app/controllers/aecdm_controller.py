@@ -17,7 +17,7 @@ async def get_token(token: str = Depends(get_token)):
     return token
 
 
-@router.get("/hubs")
+@router.get("/hubs", include_in_schema=False)
 async def get_hubs(token: str = Depends(get_token)):
     client = AECDataModelClient(token)
     service = AECDMService(client)
@@ -52,7 +52,7 @@ async def get_elementGroupsByProject(project_id: str, token: str = Depends(get_t
     return await service.get_elementGroupsByProject(project_id)
 
 
-@router.post("/category/elements/category")
+@router.post("/category/elements/category", include_in_schema=False)
 async def get_elementsFromCategory(
         req: CategoryRequest,
         token: str = Depends(get_token),
