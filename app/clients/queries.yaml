@@ -1,0 +1,99 @@
+GET_HUBS: |
+  query GetHubs {
+    hubs {
+      pagination { cursor }
+      results { name id }
+    }
+  }
+
+GET_PROJECTS: |
+  query GetProjects($hubId: ID!) {
+    projects(hubId: $hubId) {
+      pagination { cursor }
+      results {
+        id
+        name
+        alternativeIdentifiers {
+          dataManagementAPIProjectId
+        }
+      }
+    }
+  }
+
+GET_FOLDERS_BY_PROJECT: |
+  query ($projectId: ID!) {
+    foldersByProject(projectId: $projectId) {
+      results {
+      id
+      name
+      }
+    }
+  }
+
+GET_FOLDERS_BY_FOLDER: |
+  query GetFoldersByFolder($projectId: ID!, $folderId: ID!) {
+    foldersByFolder(projectId: $projectId, folderId: $folderId) {
+      results {
+        id
+        name
+      }
+    }
+  }
+
+GET_ELEMENT_GROUPS_BY_PROJECT: |
+  query GetElementGroupsByProject($projectId: ID!) {
+    elementGroupsByProject(projectId: $projectId) {
+      pagination { cursor }
+      results{
+          name
+          id
+          alternativeIdentifiers{
+          fileUrn
+          fileVersionUrn
+        }
+      }
+    }
+  }
+
+GET_ELEMENTS_FROM_CATEGORY: |
+  query ($elementGroupId: ID!, $propertyFilter: String!) {
+    elementsByElementGroup(elementGroupId: $elementGroupId, filter: {query:$propertyFilter}) {
+      pagination {
+        cursor
+      }
+      totalCount
+      results {
+        id
+        name
+        createdOn
+        lastModifiedOn
+        properties {
+          results {
+            name
+            value
+            displayValue
+            definition {
+                id
+                name
+            }
+          }
+        }
+        references {
+          results {
+              name
+              value {
+                  id
+                  name
+                  properties {
+                      results {
+                          name
+                          value
+                          displayValue
+                      }
+                  }
+              }
+          }
+        }
+      }
+    }
+  }
