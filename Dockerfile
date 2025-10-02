@@ -9,4 +9,4 @@ COPY .env .env
 # FastAPI 애플리케이션 복사
 COPY . .
 # 서버 실행 명령어
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7700"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
